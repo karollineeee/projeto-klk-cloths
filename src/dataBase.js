@@ -31,7 +31,7 @@ export const BaseDeDados = [
     id: 5,
     nome: "camisa",
     categoria: "masculino",
-    imagem: "src/assets/imagens/camisa.jpeg",
+    imagem: "/imagens/camisa.jpeg",
     descricao: "a",
   },
   {

@@ -1,0 +1,130 @@
+import { useState } from "react";
+import { Card } from "./assets/components/Card";
+import { BaseDeDados } from "./dataBase";
+
+function App() {
+  return (
+    <>
+      {/*Cabeçario do site*/}
+      <header
+        style={{
+          backgroundColor: "#b04a6a",
+          color: "white",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "10px 20px",
+        }}
+      >
+        {/*título*/}
+        <h1> KLK modas</h1>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <button
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            <img
+              src="/imagens/shopping_bag.png"
+              style={{
+                width: "30px",
+                height: "30px",
+              }}
+            />
+          </button>
+
+          <button
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            <img
+              src="/imagens/profile_icon.png"
+              style={{
+                width: "40px",
+                height: "40px",
+              }}
+            />
+          </button>
+        </div>
+      </header>
+
+      <section
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          backgroundColor: "#d984ad",
+        }}
+      >
+        <button
+          style={{
+            border: "none",
+            backgroundColor: "transparent",
+            cursor: "pointer",
+          }}
+        >
+          Feminino
+        </button>
+        <button
+          style={{
+            border: "none",
+            backgroundColor: "transparent",
+            cursor: "pointer",
+          }}
+        >
+          Masculino
+        </button>
+        <button
+          style={{
+            border: "none",
+            backgroundColor: "transparent",
+            cursor: "pointer",
+          }}
+        >
+          Infantil
+        </button>
+        <button
+          style={{
+            border: "none",
+            backgroundColor: "transparent",
+            cursor: "pointer",
+          }}
+        >
+          Acessórios
+        </button>
+      </section>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(200px,1fr))",
+          gap: "10px",
+          padding: "50px",
+          justifyItems: "center",
+        }}
+      >
+        {BaseDeDados.map((p) => (
+          <Card
+            key={p.id}
+            descricao={p.descricao}
+            nome={p.nome}
+            categoria={p.categoria}
+            imagem={p.imagem}
+          />
+        ))}
+      </div>
+    </>
+  );
+}
+
+export default App;
