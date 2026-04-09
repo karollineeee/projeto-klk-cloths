@@ -1,0 +1,3 @@
+function App() {
+  const [categoriaFiltro, setcategoriaFiltro] = useState ("todos");
+  const produtosFiltrados = categoriaFiltro === "todos" ? BaseDeDados: BaseDeDados.filter ((p)=>p.categoria===categoriaFiltro)
