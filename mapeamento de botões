@@ -1,0 +1,28 @@
+<section className="flex justify-around bg-pink-900 text-white">
+        {["Todos", "Feminino", "Masculino", "Infantil", "Acessórios"].map((cat)=>(
+          <button key={cat} onClick={()=>setcategoriaFiltro(cat)}>
+            {cat}
+          </button>
+        ))}
+
+      </section>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(200px,1fr))",
+          gap: "10px",
+          padding: "50px",
+          justifyItems: "center",
+        }}
+      >
+        {produtosFiltrados.map((p) => (
+          <Card
+            key={p.id}
+            descricao={p.descricao}
+            nome={p.nome}
+            categoria={p.categoria}
+            imagem={p.imagem}
+          />
+        ))}
+      </div>
