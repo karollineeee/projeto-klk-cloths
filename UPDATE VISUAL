@@ -1,0 +1,22 @@
+Acrescentado LOGO, CORES ORIGINAIS ALTERADAS
+
+{/*Cabeçario do site*/}
+      <header className="bg-pink-700 text-white flex justify-between items-center"
+        style={{ backgroundColor: "#EF546F"}}
+      >
+        
+        <img src="src/assets/imagens/KLK.png" className="w-50 h-22 p-4"/>
+
+
+
+{/*Menu de produtos*/}
+      <section className="flex justify-around text-white"
+      style={{backgroundColor: "#F493A6"}}
+      >
+        {["Todos", "Corpo Inteiro", "Blusas", "Calças", "Acessórios"].map((cat)=>(
+          <button key={cat} onClick={()=>setcategoriaFiltro(cat)}>
+            {cat}
+          </button>
+        ))}
+
+      </section>
