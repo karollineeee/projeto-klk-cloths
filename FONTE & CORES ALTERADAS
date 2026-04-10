@@ -1,0 +1,12 @@
+{/*Cabeçario do site*/}
+      <header className="bg-pink-700 text-white flex justify-between items-center"
+        style={{ backgroundColor: "#EF546F"}}
+
+
+{/*Menu de produtos*/}
+      <section className="flex justify-around text-white"
+      style={{
+      backgroundColor: "#F493A6",
+      fontFamily: "Poppins, sans-serif",
+      fontWeight: 200
+     }}
