@@ -1,0 +1,8 @@
+function App() {
+  const [categoriaFiltro, setcategoriaFiltro] = useState ("Todos");
+  const [busca, setBusca] = useState("");
+  const produtosFiltrados = BaseDeDados.filter((p) => {
+  const matchCategoria = categoriaFiltro === "Todos" || p.categoria === categoriaFiltro;
+  const matchBusca = p.nome.toLowerCase().includes(busca.toLowerCase()) || p.categoria.toLowerCase().includes(busca.toLowerCase()) || p.descricao.toLowerCase().includes(busca.toLowerCase());
+  return matchCategoria && matchBusca;
+});
