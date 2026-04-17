@@ -1,0 +1,50 @@
+export function Menu({ categoriaFiltro, setcategoriaFiltro, busca, setBusca }) {
+  const categorias = ["Todos", "Corpo Inteiro", "Blusas", "Calças", "Acessórios"];
+
+  function toggleCategoria(cat) {
+    if (cat === "Todos") {
+      setcategoriaFiltro(["Todos"]);
+      return;
+    }
+
+    const semTodos = categoriaFiltro.filter((c) => c !== "Todos");
+    const jaSelected = semTodos.includes(cat);
+
+    if (jaSelected) {
+      const nova = semTodos.filter((c) => c !== cat);
+      setcategoriaFiltro(nova.length === 0 ? ["Todos"] : nova);
+    } else {
+      setcategoriaFiltro([...semTodos, cat]);
+    }
+  }
+
+  return (
+    <>
+      <section className="mt-3 flex justify-center">
+        <input
+          type="text"
+          placeholder="Buscar produto..."
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)}
+          className="border rounded px-4 py-2 w-1/2"
+        />
+      </section>
+
+      <section className="flex justify-center gap-5 mt-3 text-white">
+        {categorias.map((cat) => {
+          const ativo = categoriaFiltro.includes(cat);
+          return (
+            <button
+              key={cat}
+              onClick={() => toggleCategoria(cat)}
+              className={`rounded-3xl shadow-3xl p-3 w-30 cursor-pointer transition-all
+                ${ativo ? "bg-pink-500 scale-105" : "bg-pink-300"}`}
+            >
+              {cat}
+            </button>
+          );
+        })}
+      </section>
+    </>
+  );
+}
