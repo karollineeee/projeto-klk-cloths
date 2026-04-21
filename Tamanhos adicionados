@@ -1,0 +1,3 @@
+  const categorias = ["Todos", "Corpo Inteiro", "Blusas", "Calças", "Acessórios"];
+  const tamanhos = ["Todos", "PP", "P", "M", "G", "GG", "Único"];
+  const tecidos = ["Todos", "Linho", "Algodão", "Jeans", "Seda", "Prata 925"];
