@@ -1,55 +1,55 @@
 import { Card } from "./assets/components/Card";
 import { BaseDeDados } from "./dataBase";
+import { useState } from "react";
+import { Cabecalho } from "./assets/components/Cabecalho";
+import { Menu } from "./assets/components/Menu";
 import "tailwindcss";
 
+function Fundo() {
+  return (
+    <div className="absolute inset-0 bg-cover bg-center"
+      style={{ backgroundImage: "url('/src/assets/imagens/fundo.png')", opacity: 0.3, filter: "grayscale(100%)" }}
+    />
+  );
+}
+
+function GradeDeCards({ produtosFiltrados }) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px,1fr))", gap: "10px", padding: "50px", justifyItems: "center" }}>
+      <Card itensFiltrados={produtosFiltrados} />
+    </div>
+  );
+}
 
 function App() {
+  const [categoriaFiltro, setcategoriaFiltro] = useState(["Todos"]);
+  const [tamanhoFiltro, setTamanhoFiltro] = useState(["Todos"]);
+  const [tecidoFiltro, setTecidoFiltro] = useState(["Todos"]);
+  const [busca, setBusca] = useState("");
+
+  const produtosFiltrados = BaseDeDados.filter(({ nome, categoria, descricao, tamanhos, tecido }) =>
+    (categoriaFiltro.includes("Todos") || categoriaFiltro.includes(categoria)) &&
+    (tamanhoFiltro.includes("Todos") || tamanhos?.some((t) => tamanhoFiltro.includes(t))) &&
+    (tecidoFiltro.includes("Todos") || tecidoFiltro.includes(tecido)) &&
+    [nome, categoria, descricao].some((c) => c.toLowerCase().includes(busca.toLowerCase()))
+  );
+
   return (
-    <>
-      {/*Cabeçario do site*/}
-      <header className="bg-pink-700 text-white flex justify-between items-center">
-        <h1> KLK modas</h1>
-
-        {/*ícones de shopping bag e perfil*/}
-        <div className="flex items-center gap-4">
-          <button className="bg-transparent border-none cursor-pointer">
-            <img src="src/assets/imagens/shopping_bag.png" className="w-8 h-8"/>
-          </button>
-
-          <button className="bg-transparent border-none cursor-pointer">
-            <img src="src/assets/imagens/profile_icon.png" className="w-8 h-8"/>
-          </button>
-        </div>
-      </header>
-
-      {/*Menu de produtos*/}
-      <section className="flex justify-around bg-pink-900 text-white">
-        <button className="bg-transparent border-none cursor-pointer"> Feminino </button>
-        <button className="bg-transparent border-none cursor-pointer"> Masculino </button>
-        <button className="bg-transparent border-none cursor-pointer"> Infantil </button>
-        <button className="bg-transparent border-none cursor-pointer"> Acessórios </button>
-      </section>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(200px,1fr))",
-          gap: "10px",
-          padding: "50px",
-          justifyItems: "center",
-        }}
-      >
-        {BaseDeDados.map((p) => (
-          <Card
-            key={p.id}
-            descricao={p.descricao}
-            nome={p.nome}
-            categoria={p.categoria}
-            imagem={p.imagem}
+    <div className="relative min-h-screen w-full">
+      <Fundo />
+      <div className="relative z-10">
+        <div className="min-h-screen w-full">
+          <Cabecalho />
+          <Menu
+            categoriaFiltro={categoriaFiltro} setcategoriaFiltro={setcategoriaFiltro}
+            tamanhoFiltro={tamanhoFiltro} setTamanhoFiltro={setTamanhoFiltro}
+            tecidoFiltro={tecidoFiltro} setTecidoFiltro={setTecidoFiltro}
+            busca={busca} setBusca={setBusca}
           />
-        ))}
+          <GradeDeCards produtosFiltrados={produtosFiltrados} />
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
