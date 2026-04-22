@@ -1,0 +1,45 @@
+function makeToggle(filtro, setFiltro) {
+  return (valor) => {
+    if (valor === "Todos") return setFiltro(["Todos"]);
+    const semTodos = filtro.filter((c) => c !== "Todos");
+    const nova = semTodos.includes(valor) ? semTodos.filter((c) => c !== valor) : [...semTodos, valor];
+    setFiltro(nova.length === 0 ? ["Todos"] : nova);
+  };
+}
+
+function BarraDeBusca({ busca, setBusca }) {
+  return (
+    <section className="mt-3 flex justify-center">
+      <input type="text" placeholder="Buscar produto..." value={busca}
+        onChange={(e) => setBusca(e.target.value)} className="border rounded px-4 py-2 w-1/2" />
+    </section>
+  );
+}
+
+function BotoesFiltro({ itens, filtro, toggle, corAtivo, corInativo, extra }) {
+  return (
+    <section className="flex justify-center gap-3 mt-3 text-white">
+      {itens.map((item) => (
+        <button key={item} onClick={() => toggle(item)}
+          className={`rounded-3xl cursor-pointer transition-all ${extra} ${filtro.includes(item) ? corAtivo : corInativo}`}>
+          {item}
+        </button>
+      ))}
+    </section>
+  );
+}
+
+export function Menu({ categoriaFiltro, setcategoriaFiltro, tamanhoFiltro, setTamanhoFiltro, tecidoFiltro, setTecidoFiltro, busca, setBusca }) {
+  const categorias = ["Todos", "Corpo Inteiro", "Blusas", "Calças", "Acessórios"];
+  const tamanhos = ["Todos", "PP", "P", "M", "G", "GG", "Único"];
+  const tecidos = ["Todos", "Linho", "Algodão", "Jeans", "Seda", "Prata 925"];
+
+  return (
+    <>
+      <BarraDeBusca busca={busca} setBusca={setBusca} />
+      <BotoesFiltro itens={categorias} filtro={categoriaFiltro} toggle={makeToggle(categoriaFiltro, setcategoriaFiltro)} corAtivo="bg-pink-500 scale-105" corInativo="bg-pink-300" extra="p-3 w-30" />
+      <BotoesFiltro itens={tamanhos}   filtro={tamanhoFiltro}   toggle={makeToggle(tamanhoFiltro,   setTamanhoFiltro)}   corAtivo="bg-rose-500 scale-105" corInativo="bg-rose-300" extra="p-2 w-16 text-sm" />
+      <BotoesFiltro itens={tecidos}    filtro={tecidoFiltro}    toggle={makeToggle(tecidoFiltro,    setTecidoFiltro)}    corAtivo="bg-purple-500 scale-105" corInativo="bg-purple-300" extra="p-2 px-4 text-sm" />
+    </>
+  );
+}
